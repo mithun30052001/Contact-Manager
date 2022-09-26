@@ -1,16 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ContactManager</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Mycontact</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%# <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<!-- navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+          <%= link_to "My contact", root_path, class: "navbar-brand text-uppercase" %>
+        </div>
+        <!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <div class="nav navbar-right navbar-btn">
+            <%= link_to new_contact_path, class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-plus"></i>
+              Add Contact
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
 
-  <body>
-    <%= yield %>
-  </body>
+	<!-- content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group">
+            <a href="#" class="list-group-item active">All Contact <span class="badge">10</span></a>
+            <a href="" class="list-group-item">Family <span class="badge">4</span></a>
+            <a href="" class="list-group-item">Friends <span class="badge">3</span></a>
+            <a href="" class="list-group-item">Other <span class="badge">3</span></a>
+          </div>
+        </div><!-- /.col-md-3 -->
+
+        <div class="col-md-9">
+
+          <% flash.each do |type, message| %>
+            <%= content_tag :div, class: "alert alert-#{type} alert-dismissible", role: "alert" do %>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <%= message %>
+            <% end %>
+          <% end %>
+
+          <%= yield %>
+
+        </div>
+      </div>
+    </div>
+
+</body> 
 </html>
